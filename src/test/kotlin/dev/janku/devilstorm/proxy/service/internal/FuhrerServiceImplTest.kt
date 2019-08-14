@@ -4,8 +4,6 @@ import dev.janku.devilstorm.proxy.service.port.TeufelsturmWebpagePort
 import org.jsoup.Jsoup
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-
-import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
@@ -19,8 +17,9 @@ internal class FuhrerServiceImplTest {
     private lateinit var teufelsturmWebpagePortMock: TeufelsturmWebpagePort
 
     // tested service
-    @InjectMocks
-    private val service = FuhrerServiceImpl()
+    private val service = FuhrerServiceImpl(
+            rootUrl = "http://root.url",
+            teufelsturmWebpagePort = teufelsturmWebpagePortMock)
 
     private fun getResourceAsString(classpathUri: String): String {
         return object {}.javaClass.getResource(classpathUri).readText()

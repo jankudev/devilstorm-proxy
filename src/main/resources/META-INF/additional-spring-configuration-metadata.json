@@ -1,9 +1,9 @@
 {
   "properties": [
     {
-      "name": "application.teufelsturmRootUrl",
+      "name": "teufelsturm.root.url",
       "type": "java.lang.String",
-      "description": "Root URL as string for the Teufelsturm.de web pages."
+      "description": "Description for teufelsturm.root.url."
     }
   ]
 }

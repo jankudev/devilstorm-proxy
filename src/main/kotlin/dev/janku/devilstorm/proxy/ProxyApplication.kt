@@ -1,6 +1,6 @@
 package dev.janku.devilstorm.proxy
 
-import dev.janku.devilstorm.proxy.service.internal.FuhrerServiceImpl
+import dev.janku.devilstorm.proxy.service.FuhrerService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -8,9 +8,9 @@ import org.springframework.boot.runApplication
 class ProxyApplication
 
 fun main(args: Array<String>) {
-    runApplication<ProxyApplication>(*args)
+    val ctx = runApplication<ProxyApplication>(*args)
 
-    val service = FuhrerServiceImpl()
+    val service = ctx.getBean(FuhrerService::class.java)
 
     println("List of all regions")
     println(service.listRegions())

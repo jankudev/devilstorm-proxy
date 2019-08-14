@@ -7,17 +7,16 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 @Service
-class TeufelsturmHttpJsoupAdapter : TeufelsturmWebpagePort {
-
-    @Value("teufelsturm.root.url")
-    lateinit var ROOT_URL: String
+class TeufelsturmHttpJsoupAdapter(
+        @Value("\${teufelsturm.root.url}") private val rootUrl: String
+) : TeufelsturmWebpagePort {
 
     override fun getPage(rootRelativeUrl: String): Document {
-        return Jsoup.connect(ROOT_URL + rootRelativeUrl).get()
+        return Jsoup.connect(rootUrl + rootRelativeUrl).get()
     }
 
     override fun postPage(rootRelativeUrl: String, data: Map<String, String>): Document {
-        val connection = Jsoup.connect(ROOT_URL + rootRelativeUrl)
+        val connection = Jsoup.connect(rootUrl + rootRelativeUrl)
         data.forEach { it -> connection.data(it.key, it.value) }
         return connection.post()
     }

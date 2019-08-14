@@ -6,18 +6,15 @@ import dev.janku.devilstorm.proxy.domain.Summit
 import dev.janku.devilstorm.proxy.domain.SummitDetail
 import dev.janku.devilstorm.proxy.service.FuhrerService
 import dev.janku.devilstorm.proxy.service.port.TeufelsturmWebpagePort
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.net.URL
 
 @Service
-class FuhrerServiceImpl : FuhrerService {
-    @Value("teufelsturm.root.url")
-    lateinit var ROOT_URL: String
-
-    @Autowired
-    private lateinit var teufelsturmWebpagePort: TeufelsturmWebpagePort
+class FuhrerServiceImpl(
+        @Value("\${teufelsturm.root.url}") private val rootUrl: String,
+        private val teufelsturmWebpagePort: TeufelsturmWebpagePort
+) : FuhrerService {
 
     override fun listRegions(): Collection<Region> {
         val document = teufelsturmWebpagePort.getPage("/gebiete/")
@@ -59,10 +56,10 @@ class FuhrerServiceImpl : FuhrerService {
         val latitude = summitDocument.select("td > font:containsOwn(Latitude)")?.first()?.parent()?.siblingElements()?.text()
 
         val images = summitDocument.select("a[href^='/fotos/anzeige.php']").map { element ->
-            val thumbnailUrl = URL(ROOT_URL + element.select("img").attr("src"))
+            val thumbnailUrl = URL(rootUrl + element.select("img").attr("src"))
 
             val photoDocument = teufelsturmWebpagePort.getPage(element.attr("href"))
-            val url = URL(ROOT_URL + photoDocument.select("img[src^='/img/fotos/']").attr("src"))
+            val url = URL(rootUrl + photoDocument.select("img[src^='/img/fotos/']").attr("src"))
 
             PhotoLink(thumbnailUrl = thumbnailUrl, url = url)
         }
