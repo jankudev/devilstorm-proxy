@@ -1,4 +1,4 @@
-package dev.janku.devilstorm.proxy.service.internal.domain
+package dev.janku.devilstorm.proxy.domain
 
 data class SummitDetail(
         val summit: Summit,

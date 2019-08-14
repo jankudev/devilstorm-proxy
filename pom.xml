@@ -15,15 +15,23 @@
     <description>Teufelsturm.de data proxy</description>
 
     <properties>
-        <java.version>1.8</java.version>
         <kotlin.version>1.2.71</kotlin.version>
+        <jsoup.version>1.10.2</jsoup.version>
     </properties>
 
     <dependencies>
+        <!-- Spring/SpringBoot dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Kotlin support -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
@@ -33,12 +41,14 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
 
+        <!-- Web parsing support -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.10.2</version>
+            <version>${jsoup.version}</version>
         </dependency>
 
+        <!-- Testing support -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
