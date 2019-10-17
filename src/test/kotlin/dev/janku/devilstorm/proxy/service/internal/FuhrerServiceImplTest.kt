@@ -3,23 +3,32 @@ package dev.janku.devilstorm.proxy.service.internal
 import dev.janku.devilstorm.proxy.service.port.TeufelsturmWebpagePort
 import org.jsoup.Jsoup
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-internal class FuhrerServiceImplTest {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class FuhrerServiceImplTest {
 
     // mocks
     @Mock
     private lateinit var teufelsturmWebpagePortMock: TeufelsturmWebpagePort
 
     // tested service
-    private val service = FuhrerServiceImpl(
-            rootUrl = "http://root.url",
-            teufelsturmWebpagePort = teufelsturmWebpagePortMock)
+    private lateinit var service: FuhrerServiceImpl
+
+    // initialization
+    @BeforeAll
+    fun setUp() {
+        service = FuhrerServiceImpl(
+                rootUrl = "http://root.url",
+                teufelsturmWebpagePort = teufelsturmWebpagePortMock)
+    }
 
     private fun getResourceAsString(classpathUri: String): String {
         return object {}.javaClass.getResource(classpathUri).readText()

@@ -17,7 +17,7 @@ class TeufelsturmHttpJsoupAdapter(
 
     override fun postPage(rootRelativeUrl: String, data: Map<String, String>): Document {
         val connection = Jsoup.connect(rootUrl + rootRelativeUrl)
-        data.forEach { it -> connection.data(it.key, it.value) }
+        data.forEach { connection.data(it.key, it.value) }
         return connection.post()
     }
 }
