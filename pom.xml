@@ -16,7 +16,7 @@
 
     <properties>
         <kotlin.version>1.2.71</kotlin.version>
-        <jsoup.version>1.10.2</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
     </properties>
 
